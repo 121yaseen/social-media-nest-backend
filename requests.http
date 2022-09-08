@@ -1,0 +1,13 @@
+### Test Login Flow
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "username": "test",
+    "password": "test"
+}
+
+### Test Protected Route
+GET http://localhost:8000/auth/protected
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsInN1YiI6NCwiaWF0IjoxNjYyNjM4MjExLCJleHAiOjE2NjI2MzgyNzF9.jbdSRjvJ05GSvkWzBCgxmXRoq4raSP0vWaHVw5GF5bA
+Content-Type: application/json
