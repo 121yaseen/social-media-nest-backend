@@ -9,8 +9,8 @@ import * as bcrypt from 'bcrypt';
 export class AuthService {
     constructor(
         private userService: UsersService,
-        private jwtService: JwtService  
-    ) {}
+        private jwtService: JwtService
+    ) { }
 
     async validateUser(username: string, password: string): Promise<any> {
         const user = await this.userService.findOne(username);
@@ -26,8 +26,8 @@ export class AuthService {
     async login(user: User) {
         return {
             access_token: this.jwtService.sign({
-                username: user.username, 
-                sub: user.id
+                username: user.username,
+                sub: user._id
             }),
             user
         }
@@ -35,8 +35,8 @@ export class AuthService {
 
     async signup(loginUserInput: LoginUserInput) {
         const user = await this.userService.findOne(loginUserInput.username);
-        
-        if(user) {
+
+        if (user) {
             throw new Error('User Already Exist');
         }
 

@@ -37,6 +37,7 @@ input UpdateUserInput {
 }
 
 type User {
-  id: Int!
+  _id: ID!
+  password: String!
   username: String!
 }

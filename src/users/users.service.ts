@@ -2,9 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
+import * as uuid from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { MongoRepository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
+
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: MongoRepository<User>) { }
+
   private readonly users = [
     {
       id: 1,
@@ -18,17 +26,16 @@ export class UsersService {
     },
   ]
 
-  create(createUserInput: CreateUserInput) {
-    const user = {
+  async create(createUserInput: CreateUserInput): Promise<User> {
+    const user: Partial<User> = {
       ...createUserInput,
-      id: this.users.length + 1
+      // id: uuid.v4()
     }
-    this.users.push(user);
-    return user;
+    return this.userRepository.save(user);
   }
 
-  findAll() {
-    return this.users;
+  async findAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
   findOne(username: string) {
