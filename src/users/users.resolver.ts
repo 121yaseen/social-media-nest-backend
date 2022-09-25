@@ -8,8 +8,9 @@ export class UsersResolver {
         private userService: UsersService
     ) {}
 
-    @Query(returns => User)
+    @Query(() => User, {name: 'user'})
     async user(@Args('userName') userName: string) {
-        return this.userService.findOne(userName);
+        console.log(userName)
+        return await this.userService.findOne(userName);
   }
 }

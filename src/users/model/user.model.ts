@@ -1,9 +1,11 @@
-import { Post } from "@nestjs/common";
-import { ObjectType, Field, Int } from "@nestjs/graphql";
+import { Field, ObjectType } from "@nestjs/graphql";
+import { Column, Entity } from "typeorm";
 
+@Entity()
 @ObjectType()
 export class User {
-  @Field()
+  @Field(() => String)
+  @Column()
   userName: string;
 
 }
