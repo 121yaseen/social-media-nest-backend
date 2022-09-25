@@ -13,10 +13,11 @@ import { UsersModule } from './users/users.module';
       type: 'mongodb',
       url:
         'mongodb+srv://admin:sco0MnI70zLI4L6J@main.ntzoocy.mongodb.net?retryWrites=true',
-      entities: [join(__dirname, '**/**{.entity, .model}{.ts,.js}')],
+      entities: [join(__dirname, '**/**.model.js')],
       synchronize: true,
       useNewUrlParser: true,
       logging: true,
+      useUnifiedTopology: true
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

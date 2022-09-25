@@ -11,13 +11,10 @@ export class UsersService {
     ) {}
 
     async findOne(userName: string) {
-        //await this.userRepository.save({ userName });
-        console.log(userName);
         let user = await this.userRepository.findOneBy({ userName: userName });
         if (!user) {
             throw new NotFoundException()
         }
-
         return user;
     }
 }

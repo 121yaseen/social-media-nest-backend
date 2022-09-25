@@ -10,7 +10,6 @@ export class UsersResolver {
 
     @Query(() => User, {name: 'user'})
     async user(@Args('userName') userName: string) {
-        console.log(userName)
         return await this.userService.findOne(userName);
   }
 }
