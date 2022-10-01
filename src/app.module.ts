@@ -7,13 +7,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { environment } from './constants';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      url: 'mongodb+srv://admin:sco0MnI70zLI4L6J@main.ntzoocy.mongodb.net/test?retryWrites=true',
-      entities: [join(__dirname, '**/**.model.js')],
+      url: environment.database.URL,
+      entities: [join(__dirname, '**/**.entity.js')],
       synchronize: true,
       useNewUrlParser: true,
       logging: true,

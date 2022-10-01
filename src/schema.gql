@@ -2,23 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input LoginUserInput {
+input CreateUserInput {
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
-  userName: String!
 }
 
 type Mutation {
-  signup(loginUserInput: LoginUserInput!): User!
+  signup(createUserInput: CreateUserInput!): User!
 }
 
 type Query {
-  user(userName: String!): User!
+  login(email: String!, password: String!): String!
+  protectedRoute: String!
+  user(email: String!): User!
 }
 
 type User {
-  _id: ID!
   email: String!
-  password: String!
-  userName: String!
+  firstName: String!
+  lastName: String!
 }
