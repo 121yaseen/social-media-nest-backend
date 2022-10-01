@@ -1,0 +1,38 @@
+// Login
+query Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) 
+}
+Query Variables
+{
+  "email": "121yaseen0@gmail.com",
+  "password": "password"
+}
+
+---------------------------------------------------------
+
+// Signup
+mutation signup($input: CreateUserInput!) {
+  signup(createUserInput: $input) {
+    email
+  }
+}
+Query Variables
+{
+  "input": {
+    "email": "121yaseen0@gmail.com",
+    "password": "password",
+    "firstName": "Muhammed",
+    "lastName": "Yaseen"
+  }
+}
+
+---------------------------------------------------------
+
+// Protected Route
+{
+  protectedRoute
+}
+Http Headers
+{
+  "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyMXlhc2VlbjBAZ21haWwuY29tIiwic3ViIjoiNjMzODU3N2RlZjBmZWExNTM4ZDc4ZjQ0IiwiZmlyc3ROYW1lIjoiTXVoYW1tZWQiLCJsYXN0TmFtZSI6Illhc2VlbiIsImlhdCI6MTY2NDY0ODg0NSwiZXhwIjoxNjY0NjUyNDQ1fQ.wJzuq1k8pkIvkY7nMkW-Ymu3icq6bQtHwBib0xVOmmw"
+}

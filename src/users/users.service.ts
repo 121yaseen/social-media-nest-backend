@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserInput } from 'src/auth/dto/create-user-input';
 import { MongoRepository } from 'typeorm';
-import { User } from './model/user.model';
+import { User } from './entity/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -10,12 +11,12 @@ export class UsersService {
     private readonly userRepository: MongoRepository<User>,
   ) {}
 
-  async findOne(userName: string) {
-    if (!userName) {
+  async findOne(email: string) {
+    if (!email) {
       return null;
     }
 
-    const user = await this.userRepository.findOneBy({ userName: userName });
+    const user: User = await this.userRepository.findOneBy({ email: email });
     if (!user) {
       throw new NotFoundException();
     }
@@ -38,20 +39,23 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  async create(email: string, userName: string, password: string) {
+  async create(request: CreateUserInput) {
     const user = new User();
-    user.email = email;
-    user.userName = userName;
-    user.password = password;
+    user.email = request.email;
+    user.password = request.password;
+    user.firstName = request.firstName;
+    user.lastName = request.lastName;
+    user.role = 'NORMAL_USER';
 
     const createdUser = await this.userRepository.save(user);
-    return createdUser;
+    console.log('User created: ', createdUser);
+    return user;
   }
 
-  async find(username: string) {
+  async find(email: string) {
     return await this.userRepository.find({
       where: {
-        userName: username,
+        email: email,
       },
     });
   }
