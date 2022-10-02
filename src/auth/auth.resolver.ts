@@ -1,11 +1,12 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Query, Context } from '@nestjs/graphql';
-import { userInfo } from 'os';
+import { Roles } from 'src/constants';
 import { User } from 'src/users/entity/user.entity';
 import { AuthService } from './auth.service';
 import { CreateUserInput } from './dto/create-user-input';
 import { AuthGuard } from './guard/auth.guard';
 import { JwtGuard } from './guard/jwt.guard';
+import { RoleGuard } from './guard/role.guard';
 
 @Resolver(() => User)
 export class AuthResolver {
@@ -33,5 +34,9 @@ export class AuthResolver {
     return user.email;
   }
 
-  // TODO: Do a role based auth
+  @Query(() => String)
+  @UseGuards(JwtGuard, new RoleGuard(Roles.ADMIN))
+  protectedAdminRoute(@Context('user') user: any) {
+    return user.email;
+  }
 }

@@ -6,3 +6,7 @@ export const environment = {
     URL: 'mongodb+srv://admin:sco0MnI70zLI4L6J@main.ntzoocy.mongodb.net/test?retryWrites=true',
   },
 };
+export const Roles = {
+  ADMIN: 'ADMIN',
+  NORMAL_USER: 'NORMAL_USER',
+};

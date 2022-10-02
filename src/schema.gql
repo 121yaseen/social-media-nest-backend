@@ -15,6 +15,7 @@ type Mutation {
 
 type Query {
   login(email: String!, password: String!): String!
+  protectedAdminRoute: String!
   protectedRoute: String!
   user(email: String!): User!
 }

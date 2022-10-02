@@ -55,6 +55,7 @@ export class AuthService {
       sub: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
+      role: user.role,
     };
 
     return jwt.sign(payload, environment.jwtSecret, {
